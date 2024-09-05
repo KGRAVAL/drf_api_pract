@@ -1,0 +1,40 @@
+Login
+Custom JSONRenderer
+Implement JWT
+Access Logged User Data or Profile
+Change Password
+Send Reset Password Email
+Reset Password
+Send Email
+dotenv
+Generate gitignore file
+Fixing Code
+Export Postman Endpoints
+
+
+pending : wht to find
+*-*-*-*-*-*-*-*-*-*-*-*
+
+what is CORS policy
+why CORS policy gies error at API integration
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+register
+{
+    "email" : "abd@123.com",
+    "name" : "djadfjaj",
+    "password" : "123123",
+    "password2" : "123123",
+    "tc" : "True"
+}
+
+log in
+
+{
+    "email": "abd@123.com",
+    "password": "123123"
+}
+
+bearer
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1Mzg1MjEzLCJpYXQiOjE3MjUzODQ2MTMsImp0aSI6Ijg0OGExZGFiNTE4ZDQ2NGRiOWUwYzgxMTY3Y2I4MTZiIiwidXNlcl9pZCI6Nn0.UitkeAjhZFc-Gt-unBHjzQvf4c57kUOQ8IWQx8JGrXs
