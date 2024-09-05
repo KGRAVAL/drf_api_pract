@@ -1,3 +1,6 @@
+from http.client import responses
+from logging import raiseExceptions
+
 from django.contrib.auth import authenticate
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
@@ -6,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.renderers import RenderUser
-from accounts.serializers import UserRegister, UserLogin, UserData, ChangePassUser
+from accounts.serializers import UserRegister, UserLogin, UserData, ChangePassUser, SendResetPassEmail
 
 
 class UserRegistrationView(APIView):
@@ -68,11 +71,28 @@ class UserProfileView(APIView):
 
 
 class UserChangePass(APIView):
+    render_classes = [RenderUser]
     permission_classes = [IsAuthenticated]
 
     def post(self, request, formate=None):
-        render_classes = [RenderUser]
-        serializer = ChangePassUser(data=request.data, context={'user': request.data})
+        serializer = ChangePassUser(data=request.data, context={'user': request.user})
+        print(request.user)
+        if serializer.is_valid(raise_exception=True):
+            return Response({
+                'msg': 'Password change success !!'
+            }, status= status.HTTP_200_OK)
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+
+class ResetPassEmail(APIView):
+    render_classes = [RenderUser]
+
+    def post(self, request, formate= None):
+        serializer = SendResetPassEmail(data= request.data)
+        if serializer.is_valid(raise_exception=True):
+            return Response({
+                'msg': 'Link to reset password sent in mail'
+            }, status= status.HTTP_200_OK)
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
 
 
