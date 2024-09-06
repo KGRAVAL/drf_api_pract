@@ -1,21 +1,16 @@
-from http.client import responses
-from logging import raiseExceptions
-
 from django.contrib.auth import authenticate
-from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.renderers import RenderUser
-from accounts.serializers import UserRegister, UserLogin, UserData, ChangePassUser, SendResetPassEmail
+from accounts.serializers import UserRegister, UserLogin, UserData, ChangePassUser, SendResetPassEmail, UserResetPass
 
 
 class UserRegistrationView(APIView):
 
     def post(self, request):
-        render_classes = [RenderUser]
         serializer = UserRegister(data=request.data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
@@ -25,14 +20,10 @@ class UserRegistrationView(APIView):
         return Response(data={'msg': 'Registration did not completed'},
                         status=status.HTTP_400_BAD_REQUEST)
 
-    # def get(self, request):
-    #     return Response({'msg':'Registration successes'})
-    #     ('error': serializer.errors)
-
-
 class UserLoginView(APIView):
+    # @staticmethod
     def post(self, request):
-        render_classes = [RenderUser]
+    # def post(request):
         serializer = UserLogin(data=request.data)
         if serializer.is_valid(raise_exception=True):
             email = serializer.data.get('email')
@@ -93,6 +84,21 @@ class ResetPassEmail(APIView):
                 'msg': 'Link to reset password sent in mail'
             }, status= status.HTTP_200_OK)
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+
+class ResetUserPass(APIView):
+    render_classes = [RenderUser]
+
+    def post(self, request, uid, token, format= None):
+        serializer= UserResetPass(data= request.data, context={
+            'uid':uid, 'token': token
+        })
+        if serializer.is_valid(raise_exception=True):
+            return Response({
+                'msg': 'Password Reset link send. Check your Email...'
+            }, status= status.HTTP_200_OK)
+        return Response(serializer.errors, {
+            'msg': 'Password Reset Email system faced issue to send link...'
+        }, status= status.HTTP_400_BAD_REQUEST)
 
 
 
