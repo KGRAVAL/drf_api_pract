@@ -1,15 +1,8 @@
-Login
-Custom JSONRenderer
-Implement JWT
-Access Logged User Data or Profile
-Change Password
-Send Reset Password Email
-Reset Password
-Send Email
 dotenv
 Generate gitignore file
 Fixing Code
 Export Postman Endpoints
+*-*-*-*-*-*-*-*-*-*-*-*
 
 
 pending : wht to find
@@ -42,4 +35,61 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI
 send m=reset mail
 {
     "email" : "kashyapg262002@gmail.com"
+}
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+BOOK DATA
+
+user data
+admin
+name : Book admin 1
+password : admin1@admin
+mail id : bookadmin@admin.com
+
+
+    fields
+------------------------
+id
+book_name
+author_name
+book_price
+published_date
+copies_available
+available_sw_cpy
+
+
+    add book
+------------------------
+{
+    "id":   "1001",
+    "book_name": "abc book1",
+    "author_name": "Author 1",
+    "book_price": "2000",
+    "published_date": "2008-11-11",
+    "copies_available": "300",
+    "available_sw_cpy": "0"
+}
+
+    delete book
+------------------------
+{
+    "id":   "1001",
+}
+
+    read book
+------------------------
+{
+    "id":   "1001",
+}
+
+    update book
+------------------------
+{
+    "id":   "1001",
+    "book_name": "abc book1",
+    "author_name": "Author 1",
+    "book_price": "5000",
+    "published_date": "2008-11-11",
+    "copies_available": "300",
+    "available_sw_cpy": "0"
 }
